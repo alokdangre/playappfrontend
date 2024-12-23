@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { ThumbUpIcon } from '@heroicons/react/solid'
 import { toggleVideoLike } from '../../services/likeService'
+import { ThumbsUpIcon } from 'lucide-react'
 
 interface LikeButtonProps {
   videoId: string
@@ -30,7 +30,7 @@ export default function LikeButton({ videoId }: LikeButtonProps) {
       onClick={handleLike}
       className={`flex items-center space-x-1 ml-4 ${isLiked ? 'text-accent' : 'text-gray-400'}`}
     >
-      <ThumbUpIcon className="h-5 w-5" />
+      <ThumbsUpIcon className="h-5 w-5" />
       <span>{likes}</span>
     </button>
   )

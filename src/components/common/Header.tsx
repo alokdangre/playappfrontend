@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { SearchIcon, UserCircleIcon, MenuIcon, UploadIcon } from '@heroicons/react/solid'
 import { useAuthContext } from '../../context/AuthContext'
+import { MenuIcon, SearchIcon, UploadIcon } from 'lucide-react'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
