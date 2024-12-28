@@ -27,6 +27,7 @@ export const VideoGrid = () => {
 
   return (
     <div className="container space-y-4 py-4 md:py-8">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold tracking-tight">Trending Videos</h2>
         <div className="flex items-center gap-2">
@@ -49,11 +50,27 @@ export const VideoGrid = () => {
         </div>
       </div>
 
+      {/* Content */}
       {loading ? (
-        <div className={`grid gap-4 ${layout === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : ''}`}>
+        <div
+          className={`grid gap-4 ${
+            layout === 'grid'
+              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+              : 'space-y-4'
+          }`}
+        >
           {[...Array(8)].map((_, i) => (
-            <div key={i} className={`space-y-3 ${layout === 'list' ? 'flex gap-4' : ''}`}>
-              <Skeleton className={`aspect-video ${layout === 'list' ? 'h-[202px] w-[360px]' : 'w-full'}`} />
+            <div
+              key={i}
+              className={`space-y-3 ${
+                layout === 'list' ? 'flex gap-4 items-center' : ''
+              }`}
+            >
+              <Skeleton
+                className={`aspect-video ${
+                  layout === 'list' ? 'h-[202px] w-[360px]' : 'w-full'
+                }`}
+              />
               <div className="space-y-2">
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-2/3" />
@@ -62,7 +79,13 @@ export const VideoGrid = () => {
           ))}
         </div>
       ) : (
-        <div className={`grid gap-4 ${layout === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : ''}`}>
+        <div
+          className={`grid gap-4 ${
+            layout === 'grid'
+              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+              : 'space-y-4'
+          }`}
+        >
           {videos.map((video) => (
             <VideoCard key={video._id} video={video} layout={layout} />
           ))}
@@ -73,4 +96,3 @@ export const VideoGrid = () => {
 }
 
 export default VideoGrid
-

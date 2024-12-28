@@ -14,14 +14,36 @@ const categories = [
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen bg-gray-100">
+      {/* Sidebar */}
+      <aside className="hidden md:block w-60 bg-white border-r shadow-sm">
+        <nav className="p-4 space-y-2">
+          {categories.map(({ icon: Icon, label }) => (
+            <Button
+              key={label}
+              variant="ghost"
+              className="w-full justify-start text-sm font-medium text-gray-700 hover:bg-gray-100"
+            >
+              <Icon className="mr-3 h-5 w-5 text-gray-500" />
+              {label}
+            </Button>
+          ))}
+        </nav>
+      </aside>
+
+      {/* Main Content */}
       <div className="flex-1">
-        <div className="border-b">
+        {/* Categories Bar */}
+        <div className="border-b bg-white">
           <ScrollArea className="w-full whitespace-nowrap">
-            <div className="flex w-max space-x-2 p-4">
+            <div className="flex w-max space-x-2 px-4 py-3">
               {categories.map(({ icon: Icon, label }) => (
-                <Button key={label} variant="secondary" className="flex items-center gap-2">
-                  <Icon className="h-4 w-4" />
+                <Button
+                  key={label}
+                  variant="secondary"
+                  className="rounded-full px-4 py-2 text-sm font-medium shadow-sm hover:bg-gray-200"
+                >
+                  <Icon className="h-4 w-4 mr-2" />
                   {label}
                 </Button>
               ))}
@@ -29,9 +51,12 @@ export default function HomePage() {
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </div>
-        <VideoGrid />
+
+        {/* Video Grid */}
+        <div className="p-4">
+          <VideoGrid />
+        </div>
       </div>
     </div>
   )
 }
-

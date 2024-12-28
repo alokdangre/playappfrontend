@@ -19,10 +19,15 @@ export const Header = () => {
   const { user, logout } = useAuthContext()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
+      <div className="container flex h-16 items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden transition-transform transform hover:scale-105"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
           <Link to="/" className="flex items-center gap-2">
@@ -41,7 +46,7 @@ export const Header = () => {
                 <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
               </svg>
             </div>
-            <span className="text-xl font-bold tracking-tight">VidShare</span>
+            <span className="text-xl font-bold tracking-tight text-gray-800 hover:text-primary">VidShare</span>
           </Link>
         </div>
 
@@ -50,9 +55,13 @@ export const Header = () => {
             <Input
               type="search"
               placeholder="Search videos..."
-              className="w-full pl-4 pr-10"
+              className="w-full rounded-lg pl-4 pr-10 shadow-md transition-all hover:shadow-lg"
             />
-            <Button size="icon" variant="ghost" className="absolute right-0 top-0 h-full px-3 text-muted-foreground">
+            <Button
+              size="icon"
+              variant="ghost"
+              className="absolute right-0 top-0 h-full px-3 text-muted-foreground"
+            >
               <Search className="h-5 w-5" />
               <span className="sr-only">Search</span>
             </Button>
@@ -62,7 +71,11 @@ export const Header = () => {
         <div className="flex items-center gap-2">
           {user ? (
             <>
-              <Button variant="ghost" size="icon" className="hidden md:inline-flex">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hidden md:inline-flex transition-transform transform hover:scale-105"
+              >
                 <Bell className="h-5 w-5" />
                 <span className="sr-only">Notifications</span>
               </Button>
@@ -74,7 +87,10 @@ export const Header = () => {
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+                  <Button
+                    variant="ghost"
+                    className="relative h-9 w-9 rounded-full border hover:border-gray-300"
+                  >
                     <Avatar className="h-9 w-9">
                       <AvatarImage src={user.avatar} alt={user.username} />
                       <AvatarFallback>{user.username.slice(0, 2).toUpperCase()}</AvatarFallback>
@@ -97,9 +113,7 @@ export const Header = () => {
                     <Link to="/settings">Settings</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={logout}>
-                    Log out
-                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={logout}>Log out</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </>
@@ -111,15 +125,15 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Search and Menu */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="border-t p-4 md:hidden">
+        <div className="border-t bg-white shadow-md p-4 md:hidden transition-all">
           <form className="mb-4">
             <div className="relative">
               <Input
                 type="search"
                 placeholder="Search videos..."
-                className="w-full pl-4 pr-10"
+                className="w-full rounded-lg pl-4 pr-10 shadow-md"
               />
               <Button size="icon" variant="ghost" className="absolute right-0 top-0 h-full px-3 text-muted-foreground">
                 <Search className="h-5 w-5" />
@@ -144,6 +158,7 @@ export const Header = () => {
         </div>
       )}
     </header>
+
   )
 }
 
