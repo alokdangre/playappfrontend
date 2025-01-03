@@ -7,21 +7,43 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      api.get<User>('/users/current-user')
-        .then(response => setUser(response.data))
-        .catch(() => localStorage.removeItem('token'))
-        .finally(() => setLoading(false));
-    } else {
+    const checkAuth = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const response = await api.get<User>('/users/current-user');
+          setUser(response.data);
+        } catch (error) {
+          console.error('Error fetching user:', error);
+          localStorage.removeItem('token');
+        }
+      }
       setLoading(false);
-    }
+    };
+
+    checkAuth();
   }, []);
 
   const login = async (email: string, password: string) => {
-    const response = await api.post('/users/login', { email, password });
-    localStorage.setItem('token', response.data.accessToken);
-    setUser(response.data.user);
+    try {
+      const response = await api.post('/users/login', { email, password });
+      localStorage.setItem('token', response.data.accessToken);
+      setUser(response.data.user);
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
+  };
+
+  const register = async (username: string, email: string, password: string) => {
+    try {
+      const response = await api.post('/users/register', { username, email, password });
+      localStorage.setItem('token', response.data.accessToken);
+      setUser(response.data.user);
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw error;
+    }
   };
 
   const logout = () => {
@@ -29,6 +51,6 @@ export const useAuth = () => {
     setUser(null);
   };
 
-  return { user, loading, login, logout };
+  return { user, loading, login, register, logout };
 };
 

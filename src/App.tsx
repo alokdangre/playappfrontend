@@ -7,6 +7,9 @@ import VideoPage from './pages/VideoPage'
 import UserProfilePage from './pages/UserProfilePage'
 import UploadPage from './pages/UploadPage'
 import SearchResultsPage from './pages/SearchResultsPage'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
@@ -16,11 +19,13 @@ function App() {
           <div className="min-h-screen bg-background text-foreground">
             <Header />
             <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/video/:id" element={<VideoPage />} />
-              <Route path="/user/:username" element={<UserProfilePage />} />
-              <Route path="/upload" element={<UploadPage />} />
-              <Route path="/search" element={<SearchResultsPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/" element={<PrivateRoute><HomePage /></PrivateRoute>} />
+              <Route path="/video/:id" element={<PrivateRoute><VideoPage /></PrivateRoute>} />
+              <Route path="/user/:username" element={<PrivateRoute><UserProfilePage /></PrivateRoute>} />
+              <Route path="/upload" element={<PrivateRoute><UploadPage /></PrivateRoute>} />
+              <Route path="/search" element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
             </Routes>
           </div>
         </Router>
