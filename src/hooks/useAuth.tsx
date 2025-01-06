@@ -35,9 +35,13 @@ export const useAuth = () => {
     }
   };
 
-  const register = async (username: string, email: string, password: string) => {
+  const register = async (formData: FormData) => {
     try {
-      const response = await api.post('/users/register', { username, email, password });
+      const response = await api.post('/users/register', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       localStorage.setItem('token', response.data.accessToken);
       setUser(response.data.user);
     } catch (error) {
