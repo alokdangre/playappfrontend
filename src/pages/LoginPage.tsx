@@ -18,7 +18,6 @@ export const LoginPage = () => {
       navigate('/')
     } catch (error) {
       console.error('Login failed:', error)
-      // Here you would typically show an error message to the user
     }
   }
 
