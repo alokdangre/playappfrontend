@@ -47,12 +47,9 @@ export const RegisterPage = () => {
       await register(formData)
       navigate('/')
     } catch (error) {
-      // if (error.response?.status === 409) {
       console.log(error)
         setError('User already exists')
-      // } else {
-      //   setError(error.response?.data?.message || 'Registration failed')
-      // }
+        setError('Registration failed')
     }
   }
 
