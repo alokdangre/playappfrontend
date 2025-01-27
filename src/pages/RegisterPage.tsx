@@ -81,7 +81,7 @@ export const RegisterPage = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email"></Label>
               <Input
                 id="email"
                 type="email"
